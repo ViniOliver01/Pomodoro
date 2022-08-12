@@ -10,7 +10,9 @@ export function History() {
   return (
     <HistoryContainer>
       <h1>Meu histórico</h1>
-
+      <pre>
+        {JSON.stringify(cycles, null, 2)}
+      </pre>
       <HistoryList>
         <table>
           <thead>
@@ -29,14 +31,15 @@ export function History() {
                 <td>{task.task}</td>
                 <td>{task.minutesAmount} Minutos</td>
                 <td>{formatDistanceToNow(task.startDate, {
-                  addSuffix: true,
-                  locale: ptBR,
-                })}</td>
+                      addSuffix: true,
+                      locale: ptBR,
+                    })}
+                </td>
                 <td>
                   {task.finishedDate && <Status statusColor="green">Concluído</Status>}
-                  {task.interruptedDate && <Status statusColor="yellow">Em andamento</Status>}
+                  {task.interruptedDate && <Status statusColor="red">Interrompido</Status>}
                   {!task.finishedDate && !task.interruptedDate && 
-                  <Status statusColor="red">Interrompido</Status>}
+                  <Status statusColor="yellow">Em andamento</Status>}
                 </td>
                 </tr>
               )
